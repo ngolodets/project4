@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
+import BookList from './BookList';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,11 +11,16 @@ class App extends React.Component {
       token: '',
       user: null,
       errorMessage: '',
-      apiData: null
+      apiData: null,
+      genre: '',
+      currentGenre: null
     }
     this.checkForLocalToken = this.checkForLocalToken.bind(this);
     this.liftToken = this.liftToken.bind(this);
     this.logout = this.logout.bind(this);
+    this.displayAllBooks = this.displayAllBooks.bind(this);
+    this.handleGenreChange = this.handleGenreChange.bind(this);
+    this.handleGenreSubmit = this.handleGenreSubmit.bind(this);
   }
 
   checkForLocalToken() {
@@ -43,24 +49,15 @@ class App extends React.Component {
               token: res.data.token,
               user: res.data.user,
               errorMessage: ''
-            })
+            }, this.displayAllBooks)
           }
         })
     }
   }
 
-  // Regular way to handle this
-  // liftToken(data) {
-  //   this.setState({
-  //     token: data.token,
-  //     user: data.user
-  //   })
-  // }
-
   // Array Destructuring way to handle this
   liftToken({token, user}) {
     this.setState({
-      // can use token: token, OR just
       token,
       user
     })
@@ -78,6 +75,45 @@ class App extends React.Component {
 
   componentDidMount() {
     this.checkForLocalToken()
+    //this.displayAllBooks()
+  }
+
+  displayAllBooks() {
+    // let config = {
+    //   headers: {
+    //     Authorization: `Bearer ${this.state.token}`
+    //   }
+    // }
+    //let url = 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=' 
+    let url = 'https://openlibrary.org/subjects/classics.json?limit=100'
+    console.log('displaying books...')
+    console.log(url)
+    //console.log(process.env.NYT_API_KEY)
+    axios.get(url).then( result => {
+      this.setState({
+        apiData: result.data.works
+      })
+      // .catch(function (error) {
+      //   console.log(error);
+      // })
+    })
+  }
+
+  handleGenreChange(e) {
+    e.preventDefault();
+    this.setState({
+      genre: e.target.value
+    })
+  }
+
+  handleGenreSubmit(e) {
+    e.preventDefault()
+    axios.get(`https://openlibrary.org/subjects/${this.state.genre}.json?limit=100`)
+      .then(result => {
+        this.setState({
+          currentGenre: result.data.works
+        })
+      })
   }
 
   render() {
@@ -87,8 +123,21 @@ class App extends React.Component {
     if (user) {
       contents = (
         <>
-          <p>Hello, {user.name}!</p>
-          <p onClick={this.logout}>Logout</p>
+          <div>
+            <p>Hello, {user.name}!</p>
+            <p onClick={this.logout}>Logout</p>
+          </div>
+          <div>
+            <form onSubmit={this.handleGenreSubmit}>
+              <input type="text" 
+                      name="genre" 
+                      placeholder="Please enter the genre" 
+                      onChange={this.handleGenreChange}
+                      value={this.state.genre} />
+              <input type="submit"/>
+            </form>
+            <BookList books={this.state.apiData} />
+          </div>
         </>
       )
     } else {
@@ -106,6 +155,5 @@ class App extends React.Component {
     )
   }
 }
-
 
 export default App;
