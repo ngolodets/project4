@@ -3,6 +3,7 @@ import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
 import BookList from './BookList';
+import BookListByGenre from './BookListByGenre';
 
 class App extends React.Component {
   constructor(props) {
@@ -136,6 +137,7 @@ class App extends React.Component {
                       value={this.state.genre} />
               <input type="submit"/>
             </form>
+            <BookListByGenre books={this.state.currentGenre} />
             <BookList books={this.state.apiData} />
           </div>
         </>

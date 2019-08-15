@@ -1,9 +1,9 @@
 import React from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 
-const BookList = (props) => {
+const BookListByGenre = props => {
   return (
-    <div className="App">
+    <div>
       {/* <h3>ALL BOOKS</h3> */}
       {props.books && props.books.map(book => (
         // <div className="drinklist" onClick={() => this.props.handleDetailsClick(drink._id)}>
@@ -25,7 +25,7 @@ const BookList = (props) => {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
-export default BookList;
+export default BookListByGenre;
