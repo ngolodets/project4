@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+//import BookDetails from './BookDetails';
 
 const BookList = (props) => {
   return (
@@ -14,7 +15,7 @@ const BookList = (props) => {
             {/* <Link to={`/${drink._id}`} 
                   style={{textDecoration: 'none',
                           color: 'black'}}> */}
-              <h4>{book.title}</h4>
+              <h4 onClick={() => props.handleBookDetailsClick(book.cover_edition_key)}>{book.title}</h4>
               {book.authors && book.authors.map(author => (
                 <p>{author.name}</p>
               ))}
