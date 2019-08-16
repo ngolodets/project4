@@ -36,7 +36,7 @@ router.post('/signup', (req, res) => {
 // Route for login
 router.post('/login', (req, res) => {
   // Find user in db by email
-  User.findOne({email: req.body.email}, (err, user) => {
+  User.findOne({email: req.body.email}).populate('books').exec((err, user) => {
     // if there is no user, return error
     if (!user) {
       res.json({type: 'error', message: 'Account not found'}) //use react to prompt to sign up
@@ -71,7 +71,7 @@ router.post('/me/from/token', (req, res) => {
         res.json({type: 'error', message: "Invalid token. Pleas login again."})
       } else {
         // if token is valid, look up user in the db
-        User.findById(user._id, (err, user) => {
+        User.findById(user._id).populate('books').exec((err, user) => {
           if (err) {
             // if user does not exist, return error
             res.json({type: 'error', message: "Database error during validation"})

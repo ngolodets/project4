@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const bookScema = new mongoose.Schema({
   title: String,
-  author: String,
-  apiKey: String
+  apiKey: String,
+  comment: String
 })
 
-module.exports = mongoose.model('Book', bookScema);
+module.exports = mongoose.model('Book', bookSchema);

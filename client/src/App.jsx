@@ -14,6 +14,7 @@ function App() {
   const [genre, setGenre] = useState('');
   const [currentGenre, setCurrentGenre] = useState({});
   const [currentBook, setCurrentBook] = useState({});
+  const [favoriteBooks, setFavoriteBooks] = useState({});
 
   useEffect(() => {
     var token = localStorage.getItem('mernToken');
@@ -87,7 +88,27 @@ function App() {
     })
   }
 
-  //console.log(user)
+  function showFavoriteBooks() {
+    let config = {
+        headers: {
+          Authorization: `Bearer ${this.state.token}`
+        }
+    }
+    axios.get('/api/books', config).then( result => {
+      setFavoriteBooks(result.data)
+    })
+  }
+
+  // favorite books list
+//   useEffect(() => {
+//     axios.get('/api/books').then((response) => {
+//       setFavoriteBooks(response.data);
+//     }).catch(function (error) {
+//       console.log(error);
+//     })
+// }, [favoriteBooks.length]) 
+
+  console.log(user)
   var contents = ''
   if (Object.keys(user).length > 1) {
     contents = (
@@ -114,11 +135,11 @@ function App() {
     )
   } else {
     contents = (
-        <>
-          <p>Please signup or login...</p>
-          <Login liftToken={setToken} />
-          <Signup liftToken={setToken} />
-        </>
+      <>
+        <p>Please signup or login...</p>
+        <Login liftToken={setToken} />
+        <Signup liftToken={setToken} />
+      </>
     );
   }
   return(
