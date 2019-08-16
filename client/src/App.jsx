@@ -36,11 +36,7 @@ function App() {
             setToken(res.data.token);
             setUser(res.data.user);
             setErrorMessage('');
-            // this.setState({
-            //   token: res.data.token,
-            //   user: res.data.user,
-            //   errorMessage: ''
-            // }, this.displayAllBooks)
+            //displayAllBooks();
           }
       })
     }
@@ -60,26 +56,36 @@ function App() {
   }
 
   useEffect(() => {
+    console.log("Data fetch...")
     checkForLocalToken();
-    displayAllBooks()
+    //displayAllBooks()
   }, [])
 
   function displayAllBooks() {
     let url = 'https://openlibrary.org/subjects/classics.json?limit=100'
     console.log('displaying books...')
     console.log(url)
-    //console.log(process.env.NYT_API_KEY)
     axios.get(url).then( result => {
       setApiData(result.data.works)
-      // .catch(function (error) {
-      //   console.log(error);
-      // })
+    }).catch(function (error) {
+      console.log(error);
     })
   }
 
   function handleGenreChange(e) {
     e.preventDefault();
     setGenre(e.target.value);
+  }
+
+  function handleGenreSubmit(e) {
+    e.preventDefault()
+    axios.get(`https://openlibrary.org/subjects/${genre}.json?limit=100`)
+      .then(result => {
+        setCurrentGenre(result.data.works)
+        // this.setState({
+        //   currentGenre: result.data.works
+        // })
+      })
   }
 
   function handleBookDetailsClick(bookKey) {
@@ -95,8 +101,8 @@ function App() {
     })
   }
 
-  var user = user;
-  console.log(user)
+  // var user = user;
+  // console.log(user)
   var contents = ''
   if (user) {
     contents = (
@@ -105,7 +111,7 @@ function App() {
           <p>Hello, {user.name}!</p>
           <p onClick={logout}>Logout</p>
         </div>
-        <div>
+        {/* <div>
           <form onSubmit={handleGenreSubmit}>
             <input type="text" 
                     name="genre" 
@@ -114,11 +120,11 @@ function App() {
                     value={genre} />
             <input type="submit"/>
           </form>
-          <h2>ALL BOOKS</h2>
-          <BookDetails bookDetails={currentBook} />
+          <h2>ALL BOOKS</h2> */}
+          {/* <BookDetails bookDetails={currentBook} />
           <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick}/>
-          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} />
-        </div>
+          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} /> */}
+        {/* </div> */}
       </>
     )
   } else {
@@ -241,15 +247,15 @@ function App() {
 //     })
 //   }
 
-//   handleGenreSubmit(e) {
-//     e.preventDefault()
-//     axios.get(`https://openlibrary.org/subjects/${this.state.genre}.json?limit=100`)
-//       .then(result => {
-//         this.setState({
-//           currentGenre: result.data.works
-//         })
-//       })
-//   }
+  // handleGenreSubmit(e) {
+  //   e.preventDefault()
+  //   axios.get(`https://openlibrary.org/subjects/${this.state.genre}.json?limit=100`)
+  //     .then(result => {
+  //       this.setState({
+  //         currentGenre: result.data.works
+  //       })
+  //     })
+  // }
 
 //   handleBookDetailsClick(bookKey) {
 //     console.log('fetching details for:', bookKey);
