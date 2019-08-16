@@ -36,16 +36,11 @@ function App() {
             setToken(res.data.token);
             setUser(res.data.user);
             setErrorMessage('');
-            //displayAllBooks();
+            displayAllBooks();
           }
       })
     }
   }, [token])
-
-  // function liftToken({token, user}) {
-  //   setToken(token);
-  //   setUser(user);
-  // }
 
   function logout() {
     // Remove token from local storage
@@ -54,12 +49,6 @@ function App() {
     setToken('');
     setUser({});
   }
-
-  // useEffect(() => {
-  //   console.log("Data fetch...")
-  //   checkForLocalToken();
-  //   //displayAllBooks()
-  // }, [])
 
   function displayAllBooks() {
     let url = 'https://openlibrary.org/subjects/classics.json?limit=100'
@@ -98,8 +87,7 @@ function App() {
     })
   }
 
-  //var user = user;
-  console.log(user)
+  //console.log(user)
   var contents = ''
   if (Object.keys(user).length > 1) {
     contents = (
@@ -117,7 +105,7 @@ function App() {
                     value={genre} />
             <input type="submit"/>
           </form>
-          <h2>ALL BOOKS</h2> */}
+          {/* <h2>ALL BOOKS</h2>  */}
           <BookDetails bookDetails={currentBook} />
           <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick}/>
           <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} />
@@ -134,10 +122,8 @@ function App() {
     );
   }
   return(
-    //<p>{contents}</p>
     contents
   )
-
 }
 
 export default App;

@@ -12,16 +12,16 @@ function BookDetails({bookDetails}) {
       <p>{details.notes}</p>
       <p>{details.pagination}</p>
       <p>Publication date: {details.publish_date}</p>
-      {details.publish_places && details.publish_places.map(place => (
-        <p>Published in: {place.name}</p>
+      {details.publish_places && details.publish_places.map((place, i) => (
+        <p key={i}>Published in: {place.name}</p>
         ))
       }
-      {details.authors && details.authors.map(author => (
-        <a href={author.url} target='_blank'>Author(s): {author.name}</a>
+      {details.authors && details.authors.map((author, i) => (
+        <a href={author.url} target='_blank' key={i} >Author(s): {author.name}</a>
         ))
       }
-      {details.ebooks && details.ebooks.map(ebook => (
-        <a href={ebook.read_url} target='_blank'>Take a peak</a>
+      {details.ebooks && details.ebooks.map((ebook, i) => (
+        <a href={ebook.read_url} target='_blank' key={i} >Take a peak</a>
         ))
       }
     </div>
