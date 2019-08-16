@@ -19,7 +19,11 @@ const userSchema = new mongoose.Schema({
     required: [true, 'You must enter an email'],
     minLength: [5, 'Email must be between 5 and 99 characters'],
     maxLength: [99, 'Email must be between 5 and 99 characters']
-  }
+  },
+  books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ret: 'Book'
+  }]
 });
 
 userSchema.set('toObject', {
@@ -27,7 +31,8 @@ userSchema.set('toObject', {
     let returnJson = {
       _id: ret._id,
       email: ret.email,
-      name: ret.name
+      name: ret.name,
+      books: ret.books
     }
     return returnJson;
   }

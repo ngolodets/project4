@@ -7,7 +7,7 @@ function BookDetails({bookDetails}) {
   return (
     <div>
       <img src={url.medium} alt=""/>
-      <a href={details.url} target='_blank'>{details.title}</a>
+      <a href={details.url} target='_blank' rel="noopener noreferrer">{details.title}</a>
       <p>{details.by_statement}</p>
       <p>{details.notes}</p>
       <p>{details.pagination}</p>
@@ -17,11 +17,11 @@ function BookDetails({bookDetails}) {
         ))
       }
       {details.authors && details.authors.map((author, i) => (
-        <a href={author.url} target='_blank' key={i} >Author(s): {author.name}</a>
+        <a href={author.url} target='_blank' key={i} rel="noopener noreferrer">Author(s): {author.name}</a>
         ))
       }
       {details.ebooks && details.ebooks.map((ebook, i) => (
-        <a href={ebook.read_url} target='_blank' key={i} >Take a peak</a>
+        <a href={ebook.read_url} target='_blank' key={i} rel="noopener noreferrer" >Take a peak</a>
         ))
       }
     </div>
