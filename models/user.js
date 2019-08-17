@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   },
   books: [{
     type: mongoose.Schema.Types.ObjectId,
-    ret: 'Book'
+    ref: 'Book'
   }]
 });
 

@@ -7,14 +7,6 @@ router.get('/', (req, res) => {
   res.json({type: 'success', message: "You accessed the protected api routes"})
 })
 
-// //GET /artists/:arid/albums -- get albums for one artist
-// app.get('/artists/:id/albums', (req, res) => {
-//   Artist.findById(req.params.id).populate('albums').exec((err, queen) => {
-//     if (err) res.json(err)
-//     res.json(queen)
-//   }) 
-// })
-
 // GET /api/books -- display/get all bookss
 // router.get('/books', (req, res) => {
 //   Books.find({}, (err, books) => {
@@ -28,7 +20,6 @@ router.get('/books', (req, res) => {
   User.findById(req.user._id).populate('books').exec((err, user) => {
     if (err) res.json(err)
     res.json(user)
-    //res.json(book)
   })
 })
 
@@ -41,18 +32,20 @@ router.get('/books/:bkid', (req, res) => {
 })
 
 //POST /api/books -- add a book to favorites list
-router.post('/books', (req, res) =>{
+router.post('/books', (req, res) => {
+  //let book = new Book(req.body)
   User.findById(req.user._id, function(err, user) {
     //Book.findById({
     Book.create({
       title: req.body.title,
-      apiKey: req.body.apiKey
+      apiKey: req.body.apiKey,
+      user: req.params._id
     }, 
-      function(err,book){
-          user.books.push(book)
-          user.save(function(err, user){
-            if (err) res.json(err)
-            res.json(user)
+    function(err,book) {
+      user.books.push(book)
+      user.save(function(err, user) {
+        if (err) res.json(err)
+        res.json(user)
       })
     })
   })
