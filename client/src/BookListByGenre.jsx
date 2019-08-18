@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BookListByGenre({books, handleBookDetailsClick}) {
+function BookListByGenre({books, handleBookDetailsClick, token}) {
 
   let content;
   if (books.length) {

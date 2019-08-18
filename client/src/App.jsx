@@ -5,6 +5,7 @@ import Signup from './Signup';
 import BookList from './BookList';
 import BookListByGenre from './BookListByGenre';
 import BookDetails from './BookDetails';
+import FavoriteBooks from './FavoriteBooks';
 
 function App() {
   const [token, setToken] = useState('');
@@ -38,6 +39,7 @@ function App() {
             setUser(res.data.user);
             setErrorMessage('');
             displayAllBooks();
+            showFavoriteBooks();
           }
       })
     }
@@ -88,26 +90,17 @@ function App() {
     })
   }
 
-  // function showFavoriteBooks() {
-  //   // let config = {
-  //   //     headers: {
-  //   //       Authorization: `Bearer ${this.state.token}`
-  //   //     }
-  //   // }
-  //   axios.get('/api/books').then( result => {
-  //     setFavoriteBooks(result.data)
-  //   })
-  // }
-
-  
-  // show favorite books:
-  useEffect(() => {
-    axios.get('/api/books').then((response) => {
-      setFavoriteBooks(response.data);
-    }).catch(function (error) {
-      console.log(error);
+  function showFavoriteBooks() {
+    let config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    axios.get('/api/books', config).then(result => {
+      setFavoriteBooks(result.data)
     })
-}, [favoriteBooks.length]) 
+    console.log('favorite books:', favoriteBooks)
+  } 
 
   //console.log(user)
   var contents = ''
@@ -129,8 +122,9 @@ function App() {
           </form>
           {/* <h2>ALL BOOKS</h2>  */}
           <BookDetails bookDetails={currentBook} />
-          <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick}/>
-          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} />
+          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} user={user} token={token} />
+          <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} />
+          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} />
         </div>
       </>
     )
