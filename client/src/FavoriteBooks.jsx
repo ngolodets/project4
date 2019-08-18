@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Favorite({refreshUser, token, user}) {
+function FavoriteBooks({refreshUser, token, user}) {
   handleFavorite(e, book) {
     e.preventDefault();
     // const newFaves = this.state.isFav.slice()
@@ -19,4 +19,4 @@ function Favorite({refreshUser, token, user}) {
 }
 }
 
-export default Favorite;
+export default FavoriteBooks;

@@ -88,27 +88,28 @@ function App() {
     })
   }
 
-  function showFavoriteBooks() {
-    let config = {
-        headers: {
-          Authorization: `Bearer ${this.state.token}`
-        }
-    }
-    axios.get('/api/books', config).then( result => {
-      setFavoriteBooks(result.data)
+  // function showFavoriteBooks() {
+  //   // let config = {
+  //   //     headers: {
+  //   //       Authorization: `Bearer ${this.state.token}`
+  //   //     }
+  //   // }
+  //   axios.get('/api/books').then( result => {
+  //     setFavoriteBooks(result.data)
+  //   })
+  // }
+
+  
+  // show favorite books:
+  useEffect(() => {
+    axios.get('/api/books').then((response) => {
+      setFavoriteBooks(response.data);
+    }).catch(function (error) {
+      console.log(error);
     })
-  }
+}, [favoriteBooks.length]) 
 
-  // favorite books list
-//   useEffect(() => {
-//     axios.get('/api/books').then((response) => {
-//       setFavoriteBooks(response.data);
-//     }).catch(function (error) {
-//       console.log(error);
-//     })
-// }, [favoriteBooks.length]) 
-
-  console.log(user)
+  //console.log(user)
   var contents = ''
   if (Object.keys(user).length > 1) {
     contents = (
