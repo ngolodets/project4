@@ -43,7 +43,7 @@ function App() {
           }
       })
     }
-  }, [token])
+  }, [token, favoriteBooks.length])
 
   function logout() {
     // Remove token from local storage
@@ -101,6 +101,18 @@ function App() {
     })
     console.log('favorite books:', favoriteBooks)
   } 
+//   useEffect(() => {
+//     let config = {
+//       headers: {
+//         Authorization: `Bearer ${token}`
+//       }
+//     }
+//     axios.get('/api/books').then((response) => {
+//       setFavoriteBooks(response.data);
+//     }).catch(function (error) {
+//       console.log(error);
+//     })
+// }, [favoriteBooks.length])
 
   //console.log(user)
   var contents = ''
@@ -122,7 +134,7 @@ function App() {
           </form>
           {/* <h2>ALL BOOKS</h2>  */}
           <BookDetails bookDetails={currentBook} />
-          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} user={user} token={token} />
+          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} user={user} token={token} setFavoriteBooks={setFavoriteBooks} />
           <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} />
           <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} />
         </div>
