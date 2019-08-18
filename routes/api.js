@@ -61,6 +61,12 @@ router.put('/books/:bookid', (req, res) => {
           res.json(book)
         }
       )
+      // user.save(err => {
+      //   if (err) res.json(err)
+      //   res.json(user)
+      // })
+      // if (err) res.json(err)
+      // res.json(user)
     }
   )
 })

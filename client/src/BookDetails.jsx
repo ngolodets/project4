@@ -8,6 +8,7 @@ function BookDetails({bookDetails}) {
     <div>
       <img src={url.medium} alt=""/>
       <a href={details.url} target='_blank' rel="noopener noreferrer">{details.title}</a>
+      <p>{details.subtitle}</p>
       <p>{details.by_statement}</p>
       <p>{details.notes}</p>
       <p>{details.pagination}</p>

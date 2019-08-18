@@ -1,12 +1,12 @@
 import React from 'react';
 
-function BookListByGenre({books, handleBookDetailsClick, token}) {
+function BookListByGenre({books, handleBookDetailsClick, displaySuggestedBooks, token}) {
 
   let content;
   if (books.length) {
     content = books.map((book, index) => {
       return (
-        <div key={index}>
+        <div key={index} onClick={() => displaySuggestedBooks(book.title)}>
         {/* <img className='drinkImg' src={drink.picture} style={{display: "block"}} /> */}
         {/* <br /> */}
         {/* <span className='caption' style={{display: "block"}}>  */}

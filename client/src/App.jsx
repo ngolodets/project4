@@ -6,6 +6,7 @@ import BookList from './BookList';
 import BookListByGenre from './BookListByGenre';
 import BookDetails from './BookDetails';
 import FavoriteBooks from './FavoriteBooks';
+import SuggestedBooks from './SuggestedBooks';
 
 function App() {
   const [token, setToken] = useState('');
@@ -16,6 +17,8 @@ function App() {
   const [currentGenre, setCurrentGenre] = useState({});
   const [currentBook, setCurrentBook] = useState({});
   const [favoriteBooks, setFavoriteBooks] = useState({});
+  const [suggestedBooks, setSuggestedBooks] = useState({});
+  const [author, setAuthor] = useState({});
 
   useEffect(() => {
     var token = localStorage.getItem('mernToken');
@@ -40,10 +43,21 @@ function App() {
             setErrorMessage('');
             displayAllBooks();
             showFavoriteBooks();
+            displaySuggestedBooks();
+            // let config = {
+            //   headers: {
+            //     Authorization: `Bearer ${token}`
+            //   }
+            // }
+            // axios.get('/api/books', config).then((response) => {
+            //   setFavoriteBooks(response.data);
+            // }).catch(function (error) {
+            //   console.log(error);
+            // })
           }
       })
     }
-  }, [token, favoriteBooks.length])
+  }, [token])//, favoriteBooks.length])
 
   function logout() {
     // Remove token from local storage
@@ -63,6 +77,34 @@ function App() {
       console.log(error);
     })
   }
+
+  function displaySuggestedBooks(bookTitle) {
+    //let title = 'aLice in wonderland'//currentBook[0].title; //favoriteBooks
+    //let title = favoriteBooks
+    //let title = 'classics'
+    
+    //console.log("title:", title)
+    //let bookTitle = title
+    //console.log("bookTitle:", bookTitle.books)
+    //bookTitle = bookTitle.toLowerCase().split(' ').join('+');
+    //bookTitle = 'classicss'
+    console.log('booktitle: ', bookTitle)
+    axios.get(`http://openlibrary.org/search.json?title=${bookTitle}`)
+      .then(result => {
+        setSuggestedBooks(result.data.docs)
+        console.log('suggested books:', result.data.docs )
+        console.log(bookTitle)
+      })
+  }
+
+  function displayMoreBooksFromAuthor(author) {
+    console.log('author: ', author)
+    axios.get(`http://openlibrary.org/search.json?author=${author}`)
+        .then(result => {
+        setAuthor(result.data.docs)
+        console.log('suggested books:', result.data.docs )
+    })
+}
 
   function handleGenreChange(e) {
     e.preventDefault();
@@ -101,18 +143,18 @@ function App() {
     })
     console.log('favorite books:', favoriteBooks)
   } 
-//   useEffect(() => {
-//     let config = {
-//       headers: {
-//         Authorization: `Bearer ${token}`
-//       }
-//     }
-//     axios.get('/api/books').then((response) => {
-//       setFavoriteBooks(response.data);
-//     }).catch(function (error) {
-//       console.log(error);
-//     })
-// }, [favoriteBooks.length])
+  // useEffect(() => {
+  //   let config = {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   }
+  //   axios.get('/api/books', config).then((response) => {
+  //     setFavoriteBooks(response.data);
+  //   }).catch(function (error) {
+  //     console.log(error);
+  //   })
+  // }, [favoriteBooks.length])
 
   //console.log(user)
   var contents = ''
@@ -133,10 +175,11 @@ function App() {
             <input type="submit"/>
           </form>
           {/* <h2>ALL BOOKS</h2>  */}
-          <BookDetails bookDetails={currentBook} />
-          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} user={user} token={token} setFavoriteBooks={setFavoriteBooks} />
-          <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} />
-          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} />
+          <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
+          <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
+          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} />
+          <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} />
+          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
         </div>
       </>
     )
