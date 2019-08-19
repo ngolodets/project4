@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setFavoriteBooks, displaySuggestedBooks, showFavoriteBooks}) {
+function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setFavoriteBooks, displaySuggestedBooks, showFavoriteBooks, displayMoreBooksFromAuthor}) {
     const [comment, setComment] = useState('');
 
     let content;
@@ -58,16 +58,21 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
     if (content.length) {
     content = content.map((book, index) => {
         return (
-        <div key={index} onClick={() => displaySuggestedBooks(book.title)}>
-            <h4 onClick={() => handleBookDetailsClick(book.apiKey)}>{book.title}</h4>
+        <div key={index}>
+        {/* // <div key={index} onClick={() => displaySuggestedBooks(book.title)}> */}
+            <h4 onClick={() => {handleBookDetailsClick(book.apiKey)
+                                displaySuggestedBooks(book.title)}
+                                }>
+                {book.title}
+            </h4>
             <h5>Comments: {book.comment}</h5>
             {/* <form onSubmit={() => handleCommentSubmit(book.comment)}>  */}
             <form onSubmit={() => handleCommentSubmit(book._id, book.comment)} >
                 <input type="text" 
                     name="comment" 
                     placeholder="Please enter your comments" 
-                    onChange={(e) => handleCommentChange(e)}
-                    
+                    onChange={handleCommentChange}
+                    value={comment}
                     comment={book.comment} />
                 <input type="submit"/>
             </form>

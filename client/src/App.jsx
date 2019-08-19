@@ -45,20 +45,10 @@ function App() {
             displayAllBooks();
             showFavoriteBooks();
             displaySuggestedBooks();
-            // let config = {
-            //   headers: {
-            //     Authorization: `Bearer ${token}`
-            //   }
-            // }
-            // axios.get('/api/books', config).then((response) => {
-            //   setFavoriteBooks(response.data);
-            // }).catch(function (error) {
-            //   console.log(error);
-            // })
           }
       })
     }
-  }, [token])//, favoriteBooks.length])
+  }, [token])
 
   function logout() {
     // Remove token from local storage
@@ -127,7 +117,6 @@ function App() {
     const url = `https://openlibrary.org/api/books?bibkeys=OLID:${bookKey}&jscmd=data&format=json`;
     console.log("url is: ",url);
     axios.get(url).then(result => {
-      //let results = "OLID" + bookKey;
       console.log("Result:", result.data[isbn])
       setCurrentBook(result.data[isbn])
     })
@@ -144,18 +133,6 @@ function App() {
     })
     console.log('favorite books:', favoriteBooks)
   } 
-  // useEffect(() => {
-  //   let config = {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     }
-  //   }
-  //   axios.get('/api/books', config).then((response) => {
-  //     setFavoriteBooks(response.data);
-  //   }).catch(function (error) {
-  //     console.log(error);
-  //   })
-  // }, [favoriteBooks.length])
 
   //console.log(user)
   var contents = ''
@@ -179,7 +156,7 @@ function App() {
           <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
           <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
           <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
-          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} />
+          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
           <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} />
           <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
         </div>
