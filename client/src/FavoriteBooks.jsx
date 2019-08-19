@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
-function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setFavoriteBooks, displaySuggestedBooks}) {
+function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setFavoriteBooks, displaySuggestedBooks, showFavoriteBooks}) {
     const [comment, setComment] = useState('');
 
     let content;
@@ -18,6 +18,7 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
             setFavoriteBooks(response.data)
             })
         })
+        showFavoriteBooks()
     }
 
     // function updateComment(id) {
@@ -39,14 +40,15 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
     }
 
     function handleCommentSubmit(e, id, comment) {
-        console.log('comment:', comment)
         e.preventDefault();
+        //comment = {comment};
+        console.log('comment:', comment)
         let config = {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         }
-        axios.put(`/api/books/${id}`, {comment: comment}, config).then(function() {
+        axios.put(`/api/books/${id}`, {comment}, config).then(function() {
             axios.get('/api/books').then(response => {
                 setFavoriteBooks(response.data)
             })
@@ -59,15 +61,16 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
         <div key={index} onClick={() => displaySuggestedBooks(book.title)}>
             <h4 onClick={() => handleBookDetailsClick(book.apiKey)}>{book.title}</h4>
             <h5>Comments: {book.comment}</h5>
-            {/* <form onSubmit={() => handleCommentSubmit(book.comment)}> */}
-            {/* <form onSubmit={() => handleCommentSubmit(book._id)} >
+            {/* <form onSubmit={() => handleCommentSubmit(book.comment)}>  */}
+            <form onSubmit={() => handleCommentSubmit(book._id, book.comment)} >
                 <input type="text" 
                     name="comment" 
                     placeholder="Please enter your comments" 
-                    onChange={handleCommentChange}
-                    value={comment} />
+                    onChange={(e) => handleCommentChange(e)}
+                    
+                    comment={book.comment} />
                 <input type="submit"/>
-            </form> */}
+            </form>
             {/* <button onClick={() => updateComment(book._id)}>UPDATE</button> */}
             <button className='fave' onClick={() => deleteBook(book._id)}>DELETE</button>
         </div>

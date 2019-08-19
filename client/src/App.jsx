@@ -7,6 +7,7 @@ import BookListByGenre from './BookListByGenre';
 import BookDetails from './BookDetails';
 import FavoriteBooks from './FavoriteBooks';
 import SuggestedBooks from './SuggestedBooks';
+import BooksByAuthor from './BooksByAuthor';
 
 function App() {
   const [token, setToken] = useState('');
@@ -177,7 +178,8 @@ function App() {
           {/* <h2>ALL BOOKS</h2>  */}
           <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
           <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
-          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} />
+          <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} />
           <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} />
           <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
         </div>

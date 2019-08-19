@@ -52,7 +52,7 @@ router.put('/books/:bookid', (req, res) => {
       Book.findByIdAndUpdate (
         req.params.bookid,
         {
-          title: req.body.title,
+          // title: req.body.title,
           comment: req.body.comment
         },
         {new: true},
