@@ -123,12 +123,14 @@ function App() {
   }
 
   function showFavoriteBooks() {
-    let config = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-    axios.get('/api/books', config).then(result => {
+    // let config = {
+    //   headers: {
+    //     Authorization: `Bearer ${token}`
+    //   }
+    // }
+    axios.get('/api/books', {headers: {
+      Authorization: `Bearer ${token}`
+    }}).then(result => {
       setFavoriteBooks(result.data)
     })
     console.log('favorite books:', favoriteBooks)

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 function BookList({books, handleBookDetailsClick, setFavoriteBooks, displaySuggestedBooks, displayMoreBooksFromAuthor, token}) {
+  
   function addToFavorites(title, apiKey) {
     let config = {
       headers: {
