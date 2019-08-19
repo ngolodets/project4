@@ -46,6 +46,7 @@ router.post('/books', (req, res) => {
 
 //PUT /api/books/:bookid -- update one book for one user -- works
 router.put('/books/:bookid', (req, res) => {
+  console.log("#################  hitting the PUT route #################")
   User.findById(
     req.user._id,
     (err, user) => {

@@ -21,19 +21,6 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
         showFavoriteBooks()
     }
 
-    // function updateComment(id) {
-    //     let config = {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     }
-    //     axios.put(`/api/books/${id}`, config).then(function() {
-    //         axios.get('/api/books').then(response => {
-    //         setFavoriteBooks(response.data)
-    //         })
-    //     })
-    // }
-
     function handleCommentChange(e) {
         e.preventDefault();
         setComment(e.target.value);
@@ -43,12 +30,14 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
         e.preventDefault();
         //comment = {comment};
         console.log('comment:', comment)
-        let config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-        axios.put(`/api/books/${id}`, {comment}, config).then(function() {
+        // let config = {
+        //     headers: {
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // }
+        axios.put(`/api/books/${id}`, {comment}, {headers: {
+            Authorization: `Bearer ${token}`
+        }}).then(function() {
             axios.get('/api/books').then(response => {
                 setFavoriteBooks(response.data)
             })
@@ -61,22 +50,20 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
         <div key={index}>
         {/* // <div key={index} onClick={() => displaySuggestedBooks(book.title)}> */}
             <h4 onClick={() => {handleBookDetailsClick(book.apiKey)
-                                displaySuggestedBooks(book.title)}
-                                }>
+                                displaySuggestedBooks(book.title)} }>
                 {book.title}
             </h4>
             <h5>Comments: {book.comment}</h5>
             {/* <form onSubmit={() => handleCommentSubmit(book.comment)}>  */}
-            <form onSubmit={() => handleCommentSubmit(book._id, book.comment)} >
+            <form onSubmit={(e) => handleCommentSubmit(e, book._id, book.comment)} >
                 <input type="text" 
                     name="comment" 
                     placeholder="Please enter your comments" 
                     onChange={handleCommentChange}
-                    value={comment}
-                    comment={book.comment} />
+                    value={comment}/>
                 <input type="submit"/>
             </form>
-            {/* <button onClick={() => updateComment(book._id)}>UPDATE</button> */}
+            {/* <button onClick={() => updateComment(book._id)}>UPDATE</button> comment={book.comment}*/}
             <button className='fave' onClick={() => deleteBook(book._id)}>DELETE</button>
         </div>
         )
