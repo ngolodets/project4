@@ -16,9 +16,9 @@ function BookList({books, handleBookDetailsClick, setFavoriteBooks, displaySugge
           ))} */}
           <p className='bookauthors'>{book.authors[0].name}</p>
           <div className='buttons'>
-            <button className='submit' id='favebutton' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
+            <button className='submit' className='favebutton' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
             <br />
-            <button className='submit' id='seemorebutton' onClick={() => displayMoreBooksFromAuthor(book.authors[0].name)}>SEE MORE FROM THIS AUTHOR</button>
+            <button className='submit' className='seemorebutton' onClick={() => displayMoreBooksFromAuthor(book.authors[0].name)}>SEE MORE FROM THIS AUTHOR</button>
           </div>
       </div>
       )
