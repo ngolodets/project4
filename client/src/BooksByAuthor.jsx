@@ -1,6 +1,6 @@
 import React from 'react';
 
-function BooksByAuthor({books, handleBookDetailsClick, token, setFavoriteBooks}) {
+function BooksByAuthor({books, handleBookDetailsClick, token, setFavoriteBooks, addToFavorites}) {
   let content;
   content = books ? books : [];
 
@@ -26,8 +26,8 @@ function BooksByAuthor({books, handleBookDetailsClick, token, setFavoriteBooks})
           <p>{book.author_name}</p>
           {/* {book.authors && book.authors.map((author, i) => (
             <p key={i}>{author.name}</p>
-          ))}
-          <button className='fave' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button> */}
+          ))} */}
+          <button className='submit' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
       </div>
       )
     })

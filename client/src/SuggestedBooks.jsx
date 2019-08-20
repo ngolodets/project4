@@ -1,22 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 
-function SuggestedBooks({suggestedBooks, handleBookDetailsClick, token, setFavoriteBooks}) {
+function SuggestedBooks({suggestedBooks, handleBookDetailsClick, token, setFavoriteBooks, addToFavorites}) {
   let content;
   content = suggestedBooks ? suggestedBooks : [];
-
-  // function addToFavorites(title, apiKey) {
-  //   let config = {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`
-  //     }
-  //   }
-  //   axios.post('api/books', {title, apiKey}, config).then((res) => {
-  //     axios.get('api/books', config).then((response) => {
-  //       setFavoriteBooks(response.data)
-  //     })
-  //   })
-  // }
 
   if (content.length) {
     content = content.map((book, index) => {
@@ -27,8 +14,8 @@ function SuggestedBooks({suggestedBooks, handleBookDetailsClick, token, setFavor
           <p>{book.author_name}</p>
           {/* {book.authors && book.authors.map((author, i) => (
             <p key={i}>{author.name}</p>
-          ))}
-          <button className='fave' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button> */}
+          ))} */}
+          <button className='submit' onClick={() => addToFavorites(book.title_suggest, book.cover_edition_key)}>ADD TO MY LIST</button>
       </div>
       )
     })

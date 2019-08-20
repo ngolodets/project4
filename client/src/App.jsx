@@ -63,6 +63,7 @@ function App() {
     setUser({});
   }
 
+  // displays the list of books on the initial page load
   function displayAllBooks() {
     let url = 'https://openlibrary.org/subjects/classics.json?limit=100'
     console.log('displaying books...')
@@ -74,6 +75,7 @@ function App() {
     })
   }
 
+  // displays the list of book suggestions based on the current book title
   function displaySuggestedBooks(bookTitle) {
     //let title = 'aLice in wonderland'//currentBook[0].title; //favoriteBooks
     //let title = favoriteBooks
@@ -93,6 +95,7 @@ function App() {
       })
   }
 
+  // displays the list of book suggestions based on the current author
   function displayMoreBooksFromAuthor(author) {
     console.log('author: ', author)
     axios.get(`http://openlibrary.org/search.json?author=${author}`)
@@ -130,6 +133,7 @@ function App() {
     })
   }
 
+  // displays the list of user's saved books
   function showFavoriteBooks() {
     // let config = {
     //   headers: {
@@ -142,6 +146,19 @@ function App() {
       })
     console.log('favorite books:', favoriteBooks)
   } 
+
+  function addToFavorites(title, apiKey) {
+    let config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+    axios.post('api/books', {title, apiKey}, config).then((res) => {
+      axios.get('api/books', config).then((response) => {
+        setFavoriteBooks(response.data)
+      })
+    })
+  }
 
   //console.log(user)
   var contents = ''
@@ -199,29 +216,9 @@ function App() {
         </div>
         <div className='flex-container'>
           <div className='left'>
-          {/* <div className='searchbox'>
-              <form onSubmit={handleGenreSubmit} >
-                <input type="text" 
-                        name="genre" 
-                        placeholder="Please enter the genre" 
-                        onChange={handleGenreChange}
-                        value={genre} />
-                <input type="submit"/>
-              </form>
-          </div> */}
-            {/* <div className='leftsearch'>
-              <form onSubmit={handleGenreSubmit} >
-                <input type="text" 
-                        name="genre" 
-                        placeholder="Please enter the genre" 
-                        onChange={handleGenreChange}
-                        value={genre} />
-                <input type="submit"/>
-              </form>
-            </div> */}
             <div className='leftlist'>
-              <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
-              <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+              <BookListByGenre books={currentGenre} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+              <BookList books={apiData} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
           </div>
           <div className='right'>
@@ -247,12 +244,12 @@ function App() {
             {/* <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} /> */}
             {/* <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
             <div className='bottomtop'>
-              <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
+              <SuggestedBooks suggestedBooks={suggestedBooks} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
             </div>
             <div className='bottombottom'>
-              <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+              <BooksByAuthor books={author} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
             </div>
-          </div>
+        </div>
       </>
     )
   } else {

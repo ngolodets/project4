@@ -75,7 +75,7 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
                 <input type="submit" className='submit' id='commentbutton'/>
             </form>
             {/* <button onClick={() => updateComment(book._id)}>UPDATE</button> comment={book.comment} value={comment}*/}
-            <button className='fave' onClick={() => deleteBook(book._id)}>DELETE</button>
+            <button className='submit' id='deletebutton' onClick={() => deleteBook(book._id)}>Delete</button>
         </div>
         )
     })

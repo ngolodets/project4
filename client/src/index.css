@@ -49,14 +49,18 @@ body {
   margin-left: 30px; 
 }
 
-#searchbutton, #commentbutton {
+#searchbutton, #commentbutton, #favebutton, #deletebutton, #seemorebutton {
   padding: 2px;
   margin: 2px;
   border: 1px solid rgb(69, 112, 110);
   color: rgb(33, 62, 61);
   border-radius: 0;
-  font-family: 'Stardos Stencil', cursive;
+  /* font-family: 'Stardos Stencil', cursive; */
   
+}
+
+#searchbutton {
+  font-family: 'Stardos Stencil', cursive;
 }
 
 #commentbox {

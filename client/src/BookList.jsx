@@ -1,20 +1,20 @@
 import React from 'react';
 import axios from 'axios';
 
-function BookList({books, handleBookDetailsClick, setFavoriteBooks, displaySuggestedBooks, displayMoreBooksFromAuthor, token}) {
+function BookList({books, handleBookDetailsClick, setFavoriteBooks, displaySuggestedBooks, displayMoreBooksFromAuthor, token, addToFavorites}) {
   
-  function addToFavorites(title, apiKey) {
-    let config = {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    }
-    axios.post('api/books', {title, apiKey}, config).then((res) => {
-      axios.get('api/books', config).then((response) => {
-        setFavoriteBooks(response.data)
-      })
-    })
-  }
+  // function addToFavorites(title, apiKey) {
+  //   let config = {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`
+  //     }
+  //   }
+  //   axios.post('api/books', {title, apiKey}, config).then((res) => {
+  //     axios.get('api/books', config).then((response) => {
+  //       setFavoriteBooks(response.data)
+  //     })
+  //   })
+  // }
 
   let content;
   if (books.length) {
@@ -26,8 +26,9 @@ function BookList({books, handleBookDetailsClick, setFavoriteBooks, displaySugge
           {book.authors && book.authors.map((author, i) => (
             <p key={i}>{author.name}</p>
           ))}
-          <button className='fave' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
-          <button onClick={() => displayMoreBooksFromAuthor(book.authors[0].name)}>SEE MORE FROM THIS AUTHOR</button>
+          <button className='submit' id='favebutton' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
+          <br />
+          <button className='submit' id='seemorebutton' onClick={() => displayMoreBooksFromAuthor(book.authors[0].name)}>SEE MORE FROM THIS AUTHOR</button>
       </div>
       )
     })
