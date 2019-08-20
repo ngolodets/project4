@@ -59,6 +59,11 @@ body {
   
 }
 
+#favebutton, #seemorebutton {
+  width: 14vw;
+  font-family: 'Architects Daughter', cursive;
+}
+
 #searchbutton {
   font-family: 'Stardos Stencil', cursive;
 }
@@ -73,7 +78,45 @@ body {
   height: 70vh;
   text-align: center;
   overflow-y: auto;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.bookinfo {
+  display: inline-block;
+  width: 15vw;
+  vertical-align: top;
+  height: 25.5vh;
+  border: 4px solid rgba(255, 255, 255, 0.5);
+  /* border-style: outset; */
+  line-height: 0.92em;
+  margin: 3px;
+}
+
+.booktitle {
+  font-size: 1em;
+  margin-top: 0;
+  margin-bottom: 3px;
+  height: 10vh;
+  /* text-align: center;
+  font-size: 15px; */
+  /* height: fit-content; */
+  background-color: rgba(91, 147, 145, 0.8);
+}
+
+.bookauthors {
+  font-size: 0.73em;
+  margin-top: 0;
+  margin-bottom: 3px;
+  height: 3.8vh;
+  background-color: rgba(139, 202, 200, 0.8)
+}
+
+.buttons {
+  margin-bottom: 1px;
+  height: 10vh;
+
 }
 
 
@@ -94,12 +137,14 @@ body {
   flex: 1.1;
   overflow-y: auto;
   border: 7px solid rgba(255,255,255,0.5);
+  border-style: outset;
 }
 
 .rightfave {
   flex: 1;
   overflow-y: auto;
   border: 7px solid rgba(255,255,255,0.5);
+  border-style: outset;
 }
 
 .bottom {
