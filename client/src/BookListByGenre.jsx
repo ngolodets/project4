@@ -20,7 +20,8 @@ function BookListByGenre({books, handleBookDetailsClick, displaySuggestedBooks, 
   if (books.length) {
     content = books.map((book, index) => {
       return (
-        <div key={index} onClick={() => displaySuggestedBooks(book.title)}>
+        <div key={index} onClick={() => {displaySuggestedBooks(book.title)
+                                        displayMoreBooksFromAuthor(book.authors[0].name)}}>
           <h4 onClick={() => handleBookDetailsClick(book.cover_edition_key)}>{book.title}</h4>
           {book.authors && book.authors.map((author, i) => (
             <p key={i}>{author.name}</p>
@@ -31,7 +32,7 @@ function BookListByGenre({books, handleBookDetailsClick, displaySuggestedBooks, 
       )
     })
   } else {
-    content = <h1>No Books Found!</h1>
+    content = <h1></h1>
   }
 
   return (

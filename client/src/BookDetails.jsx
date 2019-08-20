@@ -1,11 +1,12 @@
 import React from 'react';
 
-function BookDetails({bookDetails}) {
+function BookDetails({bookDetails, displaySuggestedBooks, displayMoreBooksFromAuthor}) {
   let details = bookDetails ? bookDetails : {}
   let url = details.cover ? details.cover : {}
 
   return (
-    <div>
+    <div onClick={() => {displaySuggestedBooks(details.title)
+                        displayMoreBooksFromAuthor(details.authors[0].name)}}>
       <img src={url.medium} alt=""/>
       <a href={details.url} target='_blank' rel="noopener noreferrer">{details.title}</a>
       <p>{details.subtitle}</p>

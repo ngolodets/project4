@@ -3,11 +3,7 @@ body {
   padding: 0;
   text-align: center;
   background-color: rgb(162, 197, 195);
-  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif; */
-  /* font-family: 'Fredericka the Great', cursive; */
-  font-family: 'Architects Daughter', cursive;
+  font-family: 'IM Fell DW Pica SC', serif;
   letter-spacing: 0.7px;
   /* font-weight: bolder; */
   -webkit-font-smoothing: antialiased;
@@ -15,35 +11,73 @@ body {
   box-sizing: border-box;
 }
 
+.title {
+  margin-top: 0.1px;
+  margin-bottom: 0.1px;
+  /* font-family: 'Stardos Stencil', cursive; */
+  font-family: 'IM Fell DW Pica SC', serif;
+  font-size: 15px;
+  background-color: rgb(69, 112, 110);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: bolder;
+}
+
 .header {
+  display: flex;
   width: 100vw;
-  height: 3em;
-  position: fixed;
-  background-color: lightseagreen;
+  height: 2.25em;
+  background-color: rgb(105, 154, 152);
+  justify-content: space-between;
+  align-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: 'Stardos Stencil', cursive;
+  /* font-family: 'Homemade Apple', cursive; */
 }
 
 #hello {
-  float: left;
   padding: 5px;
+  margin-right: 30px;
+}
+
+.searchbox {
+  font-family: 'Stardos Stencil', cursive;
+  margin-right: 4vw;
 }
 
 #goodbye {
-  float: right;
   padding: 5px;
+  margin-left: 30px; 
+}
+
+#searchbutton, #commentbutton {
+  padding: 2px;
+  margin: 2px;
+  border: 1px solid rgb(69, 112, 110);
+  color: rgb(33, 62, 61);
+  border-radius: 0;
+  font-family: 'Stardos Stencil', cursive;
+  
+}
+
+#commentbox {
+  width: 150px;
 }
 
 .flex-container {
+  /* position: absolute; */
   display: flex;
-  height: 100vh;
+  height: 70vh;
   text-align: center;
   overflow-y: auto;
   /* overflow-x: hidden; */
 }
 
+
 .left {
   flex: 2;
   overflow-y: auto;
 }
+
 .right {
   flex: 1.5;
   display: flex;
@@ -51,15 +85,34 @@ body {
   overflow-y: auto;
   margin: 10px;
 }
+
 .rightdetail {
   flex: 1.1;
   overflow-y: auto;
   border: 7px solid rgba(255,255,255,0.5);
 }
+
 .rightfave {
   flex: 1;
   overflow-y: auto;
   border: 7px solid rgba(255,255,255,0.5);
+}
+
+.bottom {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 20vh;
+}
+
+.bottomtop {
+  flex: 50;
+  overflow-x: auto;
+}
+
+.bottomtop {
+  flex: 10;
+  overflow-x: auto;
 }
 
 .submit {
@@ -108,6 +161,8 @@ input[type=password] {
   transition: 0.5s;
   outline: none;
 }
+
+
 
 input[type=text]:focus {
 border: 3px solid #555;

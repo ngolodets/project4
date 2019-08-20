@@ -65,13 +65,14 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
             <h5>Comments: {book.comment}</h5>
             {/* <form onSubmit={() => handleCommentSubmit(book.comment)}>  */}
             <form onSubmit={(e) => handleCommentSubmit(e, book._id, comment)} >
-                <input type="text" 
+                <input id='commentbox' type="text" 
                     name="comment" 
-                    placeholder="Please enter your comments" 
-                    // onChange={handleCommentChange}
+                    placeholder="Please enter your comments..." 
                     onChange={(e) => setComment(e.target.value)}
-                    />
-                <input type="submit"/>
+                    style={{fontFamily: "'Stardos Stencil', cursive",
+                                color: 'rgb(69, 112, 110)',
+                                textAlign: 'center'}} />
+                <input type="submit" className='submit' id='commentbutton'/>
             </form>
             {/* <button onClick={() => updateComment(book._id)}>UPDATE</button> comment={book.comment} value={comment}*/}
             <button className='fave' onClick={() => deleteBook(book._id)}>DELETE</button>

@@ -104,7 +104,9 @@ function App() {
 
   function handleGenreChange(e) {
     e.preventDefault();
-    setGenre(e.target.value);
+    let value = e.target.value.toLowerCase()
+    //setGenre(e.target.value);
+    setGenre(value)
   }
 
   function handleGenreSubmit(e) {
@@ -113,6 +115,7 @@ function App() {
       .then(result => {
         setCurrentGenre(result.data.works)
       })
+    setGenre('')
   }
 
   function handleBookDetailsClick(bookKey) {
@@ -133,11 +136,10 @@ function App() {
     //     Authorization: `Bearer ${token}`
     //   }
     // }
-    axios.get('/api/books', {headers: {
-      Authorization: `Bearer ${token}`
-    }}).then(result => {
-      setFavoriteBooks(result.data)
-    })
+    axios.get('/api/books', {headers: {Authorization: `Bearer ${token}`}})
+      .then(result => {
+        setFavoriteBooks(result.data)
+      })
     console.log('favorite books:', favoriteBooks)
   } 
 
@@ -164,16 +166,30 @@ function App() {
                                             padding: '5px'}}>LOGOUT                        
             </p> */}
           {/* </nav> */}
+        <h5 className='title'>MY BOOKS APP</h5>
         <div className="header">
-          <p id='hello'>HELLO, {user.name}!</p>
-          <p id='goodbye' onClick={logout}>LOGOUT</p>
+          <div id='hello'>HELLO, {user.name}!</div>
+          <div className='searchbox'>
+              <form onSubmit={handleGenreSubmit} >
+                <input type="text" 
+                        name="genre" 
+                        placeholder="Please enter the genre..." 
+                        onChange={handleGenreChange}
+                        value={genre}
+                        style={{fontFamily: "'Stardos Stencil', cursive",
+                                color: 'rgb(69, 112, 110)',
+                                textAlign: 'center'}}/>
+                <input type="submit" className='submit' id='searchbutton'/>
+              </form>
+          </div>
+          <div id='goodbye' onClick={logout}>LOGOUT</div>
         </div>
         <div>
             {/* <Route exact path='/' render={ props => <DrinkAll  apiData={this.state.apiData} 
                                                               token={this.state.token} 
                                                               refreshUser={this.checkForLocalToken} 
                                                               handleDetailsClick={this.handleDetailsClick} {...props} />}/>            
-            <Route exact path='/:id' render={ props => <DrinkShow drink={current} {...props} />}/>  
+            <Route value={genre} exact path='/:id' render={ props => <DrinkShow drink={current} {...props} />}/>  
             <Route exact path='/favorites/:id' render={ props => <MyDranks 
                                               user={user} 
                                               apiData={this.state.apiData} 
@@ -183,7 +199,7 @@ function App() {
         </div>
         <div className='flex-container'>
           <div className='left'>
-            <div className='leftsearch'>
+          {/* <div className='searchbox'>
               <form onSubmit={handleGenreSubmit} >
                 <input type="text" 
                         name="genre" 
@@ -192,7 +208,17 @@ function App() {
                         value={genre} />
                 <input type="submit"/>
               </form>
-            </div>
+          </div> */}
+            {/* <div className='leftsearch'>
+              <form onSubmit={handleGenreSubmit} >
+                <input type="text" 
+                        name="genre" 
+                        placeholder="Please enter the genre" 
+                        onChange={handleGenreChange}
+                        value={genre} />
+                <input type="submit"/>
+              </form>
+            </div> */}
             <div className='leftlist'>
               <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
               <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
@@ -200,7 +226,7 @@ function App() {
           </div>
           <div className='right'>
             <div className='rightdetail'>
-              <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
+            <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
             <div className='rightfave'>
               <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
@@ -213,16 +239,20 @@ function App() {
                                                           displaySuggestedBooks={displaySuggestedBooks} 
                                                           displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} {...props}/>} />
         </div> */}
-          <div className='bottom'>
+        </div>
+        <div className='bottom'>
             {/* <h2>ALL BOOKS</h2>  */}
             {/* <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
             {/* <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
             {/* <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} /> */}
             {/* <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
-            <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
-            <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+            <div className='bottomtop'>
+              <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
+            </div>
+            <div className='bottombottom'>
+              <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+            </div>
           </div>
-        </div>
       </>
     )
   } else {
