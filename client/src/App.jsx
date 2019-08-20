@@ -8,6 +8,11 @@ import BookDetails from './BookDetails';
 import FavoriteBooks from './FavoriteBooks';
 import SuggestedBooks from './SuggestedBooks';
 import BooksByAuthor from './BooksByAuthor';
+//import {
+//   BrowserRouter as Router,
+//   Route,
+//   Link
+// } from 'react-router-dom';
 
 function App() {
   const [token, setToken] = useState('');
@@ -141,12 +146,43 @@ function App() {
   if (Object.keys(user).length > 1) {
     contents = (
       <>
-        <div>
+        {/* <nav style={{position: 'fixed', backgroundColor: 'lightblue'}}> */}
+            {/* <Link to='/' style={{textDecoration: 'none',
+                          color: 'black',
+                          margin: '5px',
+                          padding: '5px',
+                          float: 'left',}}>HOME{' '} </Link> */}
+            {/* <Link to={`/mybooks/${user._id}`} style={{textDecoration: 'none',
+                          color: 'black',
+                          margin: '5px',
+                          padding: '5px',
+                          float: 'left',}}>MY BOOKS</Link> */}
+            <p onClick={logout} style={{position: "inline-block",
+                                            color: 'black',
+                                            float: "right",
+                                            margin: '5px',
+                                            padding: '5px'}}>LOGOUT                        
+            </p>
+          {/* </nav> */}
+        <div className="App">
           <p>Hello, {user.name}!</p>
           <p onClick={logout}>Logout</p>
         </div>
         <div>
-          <form onSubmit={handleGenreSubmit}>
+            {/* <Route exact path='/' render={ props => <DrinkAll  apiData={this.state.apiData} 
+                                                              token={this.state.token} 
+                                                              refreshUser={this.checkForLocalToken} 
+                                                              handleDetailsClick={this.handleDetailsClick} {...props} />}/>            
+            <Route exact path='/:id' render={ props => <DrinkShow drink={current} {...props} />}/>  
+            <Route exact path='/favorites/:id' render={ props => <MyDranks 
+                                              user={user} 
+                                              apiData={this.state.apiData} 
+                                              token={this.state.token} 
+                                              refreshUser={this.checkForLocalToken} 
+                                              handleDetailsClick={this.handleDetailsClick} {...props} />}/>           */}
+        </div>
+        <div>
+          <form onSubmit={handleGenreSubmit} style={{position: 'fixed'}}>
             <input type="text" 
                     name="genre" 
                     placeholder="Please enter the genre" 
@@ -154,23 +190,32 @@ function App() {
                     value={genre} />
             <input type="submit"/>
           </form>
+        </div>
+        {/* <div>
+          <Route exact path='/' render={ props => <BookList books={apiData} 
+                                                          handleBookDetailsClick={handleBookDetailsClick} 
+                                                          token={token} setFavoriteBooks={setFavoriteBooks} 
+                                                          displaySuggestedBooks={displaySuggestedBooks} 
+                                                          displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} {...props}/>} />
+        </div> */}
+        <div>
           {/* <h2>ALL BOOKS</h2>  */}
+          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+          <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
           <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
+          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
           <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
           <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
-          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
-          <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} />
-          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
         </div>
       </>
     )
   } else {
     contents = (
-      <>
+      <div className='signupLoginPage'>
         <p>Please signup or login...</p>
         <Login liftToken={setToken} />
         <Signup liftToken={setToken} />
-      </>
+      </div>
     );
   }
   return(

@@ -43,23 +43,26 @@ function Signup({liftToken}) {
   return (
     <div className="signup">
       <h3>Create a New Account:</h3>
-      <form onSubmit={handleSubmit}>
+      <form className='signupform' onSubmit={handleSubmit}>
         <input onChange={handleNameChange}
                 value={name} 
                 type="text" 
                 name="name"
-                placeholder="Enter your name..." /><br />
+                placeholder="Enter your name..." 
+                className="loginsignup"/><br />
         <input onChange={handleEmailChange}
                 value={email}
                 type="email"
                 name="email" 
-                placeholder="Enter your email..." /><br />
+                placeholder="Enter your email..."
+                className="loginsignup" /><br />
         <input onChange={handlePasswordChange}
                 value={password}
                 type="password"
                 name="password" 
-                placeholder="Choose a password..." /><br />
-        <input type="submit" value="Sign up!" />
+                placeholder="Choose a password..." 
+                className="loginsignup"/><br />
+        <input type="submit" value="SIGN UP!" className='submit'/>
       </form>
     </div>
   )

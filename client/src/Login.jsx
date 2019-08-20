@@ -39,13 +39,15 @@ function Login({liftToken}) {
                 value={email} 
                 type="email"
                 name="email"
-                placeholder="Enter your email..." /><br />
+                placeholder="Enter your email..."
+                className="loginsignup" /><br />
         <input onChange={handlePasswordChange}
                 value={password}
                 type="password" 
                 name="password"
-                placeholder="Enter your password..." /><br />
-        <input type="submit" value="Log in!" />
+                placeholder="Enter your password..." 
+                className="loginsignup" /><br />
+        <input type="submit" value="LOG IN!" className='submit'/>
       </form>
     </div>
   );
