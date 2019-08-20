@@ -15,6 +15,53 @@ body {
   box-sizing: border-box;
 }
 
+.header {
+  width: 100vw;
+  height: 3em;
+  position: fixed;
+  background-color: lightseagreen;
+}
+
+#hello {
+  float: left;
+  padding: 5px;
+}
+
+#goodbye {
+  float: right;
+  padding: 5px;
+}
+
+.flex-container {
+  display: flex;
+  height: 100vh;
+  text-align: center;
+  overflow-y: auto;
+  /* overflow-x: hidden; */
+}
+
+.left {
+  flex: 2;
+  overflow-y: auto;
+}
+.right {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin: 10px;
+}
+.rightdetail {
+  flex: 1.1;
+  overflow-y: auto;
+  border: 7px solid rgba(255,255,255,0.5);
+}
+.rightfave {
+  flex: 1;
+  overflow-y: auto;
+  border: 7px solid rgba(255,255,255,0.5);
+}
+
 .submit {
   font-family: 'Architects Daughter', cursive; 
   text-align: center;

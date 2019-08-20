@@ -165,8 +165,8 @@ function App() {
             </p> */}
           {/* </nav> */}
         <div className="header">
-          <p>Hello, {user.name}!</p>
-          <p onClick={logout}>Logout</p>
+          <p id='hello'>HELLO, {user.name}!</p>
+          <p id='goodbye' onClick={logout}>LOGOUT</p>
         </div>
         <div>
             {/* <Route exact path='/' render={ props => <DrinkAll  apiData={this.state.apiData} 
@@ -198,6 +198,14 @@ function App() {
               <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
           </div>
+          <div className='right'>
+            <div className='rightdetail'>
+              <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
+            </div>
+            <div className='rightfave'>
+              <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+            </div>
+          </div>
         {/* <div>
           <Route style={{position: 'fixed'}} exact path='/' render={ props => <BookList books={apiData} 
                                                           handleBookDetailsClick={handleBookDetailsClick} 
@@ -205,15 +213,15 @@ function App() {
                                                           displaySuggestedBooks={displaySuggestedBooks} 
                                                           displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} {...props}/>} />
         </div> */}
-        <div>
-          {/* <h2>ALL BOOKS</h2>  */}
-          <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
-          {/* <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
-          <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} />
-          <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
-          <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
-          <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
-        </div>
+          <div className='bottom'>
+            {/* <h2>ALL BOOKS</h2>  */}
+            {/* <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
+            {/* <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
+            {/* <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} /> */}
+            {/* <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
+            <SuggestedBooks suggestedBooks={suggestedBooks} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
+            <BooksByAuthor books={author} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+          </div>
         </div>
       </>
     )
