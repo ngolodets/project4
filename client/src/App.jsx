@@ -214,6 +214,7 @@ function App() {
                                               refreshUser={this.checkForLocalToken} 
                                               handleDetailsClick={this.handleDetailsClick} {...props} />}/>           */}
         </div>
+        <h6 className='browse'>BROWSE BOOKS:</h6>
         <div className='flex-container'>
           <div className='left'>
             <div className='leftlist'>

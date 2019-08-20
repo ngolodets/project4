@@ -13,16 +13,18 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
     content = favoriteBooks.books ? favoriteBooks.books : {};
 
     function deleteBook(id) {
-        // let config = {
-        //     headers: {
-        //         Authorization: `Bearer ${token}`
-        //     }
-        // }
-        axios.delete(`/api/books/${id}`, {headers: {
-            Authorization: `Bearer ${token}`}})
+        let config = {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+        axios.delete(`/api/books/${id}`, config) 
+        //{headers: {
+            //Authorization: `Bearer ${token}`}})
                 .then(function() {
-                    axios.get('/api/books', {headers: {
-                        Authorization: `Bearer ${token}`}})
+                    axios.get('/api/books')
+                    //{headers: {
+                        //Authorization: `Bearer ${token}`}})
                             .then(response => {
                                 setFavoriteBooks(response.data)
             })
