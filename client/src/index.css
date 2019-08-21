@@ -213,17 +213,22 @@ body {
   overflow-x: auto;
   overflow-y: auto;
   height: 20vh;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .bottomtop {
-  flex: 50;
+  width: 90vw;
+  display: flex;
+  justify-content: flex-start;
   overflow-x: auto;
+  flex-direction: column;
 }
 
-.bottomtop {
-  flex: 10;
+/* .bottomtop {
+  flex: 1;
   overflow-x: auto;
-}
+} */
 
 .submit {
   font-family: 'Architects Daughter', cursive; 

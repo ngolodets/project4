@@ -13,15 +13,15 @@ function BookDetails({bookDetails, displaySuggestedBooks, displayMoreBooksFromAu
         </a>
         < br/>
         {details.ebooks && details.ebooks.map((ebook, i) => (
-          <div style={{margin: '5px', height: 'fit-content'}}>
-            <a className='link' href={ebook.read_url} target='_blank' key={i} rel="noopener noreferrer" >{details.title} </a>
+          <div style={{margin: '5px'}}>
+            <a className='link' href={ebook.read_url} target='_blank' key={i} rel="noopener noreferrer" ><p style={{fontWeight: 'bolder'}}>{details.title} </p></a>
             <br />
           </div>
           ))
         }
         {/* <p>{details.subtitle}</p> */}
-        <p>{details.by_statement}</p>
-        {/* <p>{details.notes}</p> */}
+        {/* <p>{details.by_statement}</p> */}
+        <p>{details.notes}</p>
         <p>{details.pagination}</p>
         <p>Publication date: {details.publish_date}</p>
         {details.publish_places && details.publish_places.map((place, i) => (

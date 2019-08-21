@@ -226,6 +226,7 @@ function App() {
             <div className='rightdetail'>
             <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
+            <h5 className='browse' style={{width: '43.5vw'}}>MY READS:</h5>
             <div className='rightfave'>
               <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
@@ -244,12 +245,14 @@ function App() {
             {/* <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
             {/* <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} /> */}
             {/* <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
-            <div className='bottomtop'>
-              <SuggestedBooks suggestedBooks={suggestedBooks} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
-            </div>
-            <div className='bottombottom'>
-              <BooksByAuthor books={author} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
-            </div>
+          <div className='bottomtop'>
+            <SuggestedBooks suggestedBooks={suggestedBooks} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
+          </div>
+        </div>
+        <div className='bottom'>
+          <div className='bottombottom'>
+            <BooksByAuthor books={author} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+          </div>
         </div>
       </>
     )
