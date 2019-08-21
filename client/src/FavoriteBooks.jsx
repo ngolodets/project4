@@ -64,7 +64,7 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
                             marginTop: '1px', 
                             marginBottom: '1px'}}>
                 <h5 className='comments'>
-                    <span style={{fontFamily: "'Stardos Stencil', cursive"}}>COMMENTS:</span> 
+                    <span style={{fontFamily: "'Stardos Stencil', cursive"}}>COMMENTS:</span> <br/>
                     {book.comment}
                 </h5>
             </div>
