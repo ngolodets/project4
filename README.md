@@ -7,4 +7,6 @@ The book app lets the user browse through a variety of books, add the books they
 To create this app, I have used JavaScript, HTML/CSS, React (with React Hooks), MongoDb, Node.js, and Express.  The application backend was built using Express; the front-end was created using React.  All the styling was accomplished using CSS.  
 
 The app utilizes JWT authentication and uses two related models: user and book via one-to-many relationship.  All of the needed user and book information is saved in the mongo database.  The application includes all major CRUD functions for a book model -- the user is able to create, read, update, and delete books from their respective book lists. 
+## General Approach
+The general approach toward creating this application consisted of first finding a reliable external API for the purposes of searching the available books.  I have used Open Library API for this project: [https://openlibrary.org/developers/api](//https://openlibrary.org/developers/api).
 
