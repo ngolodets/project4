@@ -1,10 +1,5 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-// import {
-//     BrowserRouter as Router,
-//     Route,
-//     Link
-// } from 'react-router-dom';
 
 function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setFavoriteBooks, displaySuggestedBooks, showFavoriteBooks, displayMoreBooksFromAuthor}) {
     const [comment, setComment] = useState('');
@@ -32,11 +27,6 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
         showFavoriteBooks()
     }
 
-    // function handleCommentChange(e) {
-    //     e.preventDefault();
-    //     setComment(e.target.value);
-    // }
-
     function handleCommentSubmit(e, id, comment) {
         e.preventDefault();
         console.log('comment:', comment)
@@ -58,36 +48,53 @@ function FavoriteBooks({favoriteBooks, handleBookDetailsClick, user, token, setF
     if (content.length) {
     content = content.map((book, index) => {
         return (
-        <div key={index}>
-        {/* // <div key={index} onClick={() => displaySuggestedBooks(book.title)}> */}
-            <h4 onClick={() => {handleBookDetailsClick(book.apiKey)
-                                displaySuggestedBooks(book.title)} }>
-                {book.title}
-            </h4>
-            <h5>Comments: {book.comment}</h5>
-            {/* <form onSubmit={() => handleCommentSubmit(book.comment)}>  */}
-            <form onSubmit={(e) => handleCommentSubmit(e, book._id, comment)} >
-                <input id='commentbox' type="text" 
-                    name="comment" 
-                    placeholder="Please enter your comments..." 
-                    onChange={(e) => setComment(e.target.value)}
-                    style={{fontFamily: "'Stardos Stencil', cursive",
+        <div key={index} className='favebookinfo'>
+            <div className='favebooktitle'>
+                <h4 className='favebooktitle' 
+                    onClick={() => {handleBookDetailsClick(book.apiKey)
+                                    displaySuggestedBooks(book.title)} }>
+                    {book.title}
+                </h4>
+            </div>
+            <div className='favebooktitle' 
+                    style={{width: '80%', 
+                            height: 'fit-content', 
+                            margin: '0 auto', 
+                            backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+                            marginTop: '1px', 
+                            marginBottom: '1px'}}>
+                <h5 className='comments'>
+                    <span style={{fontFamily: "'Stardos Stencil', cursive"}}>COMMENTS:</span> 
+                    {book.comment}
+                </h5>
+            </div>
+            <form className='commentform' 
+                    onSubmit={(e) => handleCommentSubmit(e, book._id, comment)} >
+                <input id='commentbox' 
+                        type="text" 
+                        name="comment" 
+                        placeholder="Please enter your comments..." 
+                        onChange={(e) => setComment(e.target.value)}
+                        style={{fontFamily: "'Stardos Stencil', cursive",
                                 color: 'rgb(69, 112, 110)',
                                 textAlign: 'center'}} />
-                <input type="submit" className='submit' id='commentbutton'/>
+                <input type="submit" 
+                        className='submit' 
+                        id='commentbutton'/>
             </form>
-            {/* <button onClick={() => updateComment(book._id)}>UPDATE</button> comment={book.comment} value={comment}*/}
-            <button className='submit' id='deletebutton' onClick={() => deleteBook(book._id)}>Delete</button>
+            <button className='submit' 
+                    id='deletebutton' 
+                    onClick={() => deleteBook(book._id)}>Delete Book
+            </button>
         </div>
         )
     })
     } else {
-    content = <h1>No Books Found!</h1>
+    content = <h1>You Don't Have Any Books Yet!</h1>
     }
 
     return (
     <div className="App">
-        {/* <h3>ALL BOOKS</h3> */}
         {content}
     </div>
     );

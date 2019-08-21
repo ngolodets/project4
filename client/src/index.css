@@ -5,10 +5,46 @@ body {
   background-color: rgb(162, 197, 195);
   font-family: 'IM Fell DW Pica SC', serif;
   letter-spacing: 0.7px;
-  /* font-weight: bolder; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+}
+
+p {
+  word-break: break-all;
+  white-space: normal;
+  /* word-wrap: break-word; */
+}
+
+a {
+  text-decoration: none;
+  color: rgb(33, 62, 61);
+  font-size: 10px;
+}
+
+.comments {
+  font-family: 'Yellowtail', cursive;
+}
+
+.favebooktitle {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  background-color: rgba(255,255,255, 0.4);
+}
+
+.favebookinfo {
+  width: 80%;
+  margin: 0 auto; 
+  border-top: 1px solid black; 
+  border-bottom: 1px solid black; 
+  margin-bottom: 2px;
+  background-color: rgb(207, 207, 158);
+}
+
+.commentform {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  height: fit-content;
 }
 
 .title {
@@ -34,7 +70,6 @@ body {
   font-family: 'Stardos Stencil', cursive;
   border-bottom: 3px solid rgba(70, 98, 98, 0.8);
   border-top: 3px solid rgba(70, 98, 98, 0.8);
-  /* font-family: 'Homemade Apple', cursive; */
 }
 
 #hello {
@@ -76,7 +111,11 @@ body {
   color: rgb(33, 62, 61);
   border-radius: 0;
   /* font-family: 'Stardos Stencil', cursive; */
-  
+}
+
+#deletebutton {
+  margin-top: 0;
+  background-color: rgba(163, 129, 129, 0.5);
 }
 
 .favebutton, .seemorebutton {
@@ -190,18 +229,18 @@ body {
   flex: 1;
   clear: left;
   margin-top: 2px;
-  background-color: yellow;
+  background-color: rgb(207, 207, 158);
   float: right;
   width: 505px;
   line-height: 1.5px;
   font-size: 9px;
   height: fit-content;
   text-align: left;
-  
+  margin-left: 5px;
 }
 
 .rightfave {
-  flex: 1.3;
+  flex: 1.7;
   overflow-y: auto;
   border: 7px solid rgba(255,255,255,0.5);
   border-style: outset;
@@ -210,32 +249,52 @@ body {
 
 .bottom {
   display: flex;
-  overflow-x: auto;
-  overflow-y: auto;
-  height: 20vh;
+  /* flex-wrap: nowrap;
+  overflow-x: auto; */
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 10vh;
   justify-content: center;
-  flex-wrap: wrap;
+  white-space: nowrap;
+  /* flex-wrap: wrap; */
 }
 
 .bottomtop {
-  width: 90vw;
+  width: 100vw;
   display: flex;
   justify-content: flex-start;
-  overflow-x: auto;
+  overflow-x: scroll;
   flex-direction: column;
+  margin-bottom: 0;
 }
 
-/* .bottomtop {
-  flex: 1;
-  overflow-x: auto;
-} */
+.bottomdetails {
+  /* flex: 0 0 auto; */
+  vertical-align: top;
+  display: inline-block;
+  width: 150px;
+  height: 80px;
+  font-size: 7px;
+  font-family: 'Architects Daughter', cursive;
+  background-color: rgba(223, 243, 242, 0.8);
+  margin-left: 2px;
+}
+
+.bottombottom {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  flex-direction: column;
+  margin-top: 0;
+}
 
 .submit {
   font-family: 'Architects Daughter', cursive; 
   text-align: center;
   letter-spacing: 1px;
   font-weight: bolder;
-  background-color: rgb(224, 234, 234);
+  background-color: rgba(224, 234, 234);
   border: 0.1px solid black;
   border-radius: 2px;
 }
@@ -310,6 +369,20 @@ input[type=password]:focus {
 		-webkit-transform: translateY(-10px);
 		transform: translateY(-10px);
 	}
+}
+
+@media only screen and (max-width: 600px) {
+  .booktitle, .bookauthors, .buttons {
+    font-size: 8px;
+  }
+
+  .bookauthors {
+    margin-bottom: 2px;
+  }
+
+  .favebutton, .seemorebutton {
+    font-size: 6px;
+  }
 }
 
 code {

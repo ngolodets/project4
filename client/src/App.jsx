@@ -8,11 +8,6 @@ import BookDetails from './BookDetails';
 import FavoriteBooks from './FavoriteBooks';
 import SuggestedBooks from './SuggestedBooks';
 import BooksByAuthor from './BooksByAuthor';
-//import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link
-// } from 'react-router-dom';
 
 function App() {
   const [token, setToken] = useState('');
@@ -66,8 +61,6 @@ function App() {
   // displays the list of books on the initial page load
   function displayAllBooks() {
     let url = 'https://openlibrary.org/subjects/classics.json?limit=100'
-    console.log('displaying books...')
-    console.log(url)
     axios.get(url).then( result => {
       setApiData(result.data.works)
     }).catch(function (error) {
@@ -77,38 +70,25 @@ function App() {
 
   // displays the list of book suggestions based on the current book title
   function displaySuggestedBooks(bookTitle) {
-    //let title = 'aLice in wonderland'//currentBook[0].title; //favoriteBooks
-    //let title = favoriteBooks
-    //let title = 'classics'
-    
-    //console.log("title:", title)
-    //let bookTitle = title
-    //console.log("bookTitle:", bookTitle.books)
     //bookTitle = bookTitle.toLowerCase().split(' ').join('+');
-    //bookTitle = 'classicss'
-    console.log('booktitle: ', bookTitle)
+    //console.log('booktitle: ', bookTitle)
     axios.get(`http://openlibrary.org/search.json?title=${bookTitle}`)
       .then(result => {
         setSuggestedBooks(result.data.docs)
-        console.log('suggested books:', result.data.docs )
-        console.log(bookTitle)
-      })
+    })
   }
 
   // displays the list of book suggestions based on the current author
   function displayMoreBooksFromAuthor(author) {
-    console.log('author: ', author)
     axios.get(`http://openlibrary.org/search.json?author=${author}`)
         .then(result => {
         setAuthor(result.data.docs)
-        console.log('suggested books:', result.data.docs )
     })
-}
+  }
 
   function handleGenreChange(e) {
     e.preventDefault();
     let value = e.target.value.toLowerCase()
-    //setGenre(e.target.value);
     setGenre(value)
   }
 
@@ -143,8 +123,7 @@ function App() {
     axios.get('/api/books', {headers: {Authorization: `Bearer ${token}`}})
       .then(result => {
         setFavoriteBooks(result.data)
-      })
-    console.log('favorite books:', favoriteBooks)
+    })
   } 
 
   function addToFavorites(title, apiKey) {
@@ -160,32 +139,15 @@ function App() {
     })
   }
 
-  //console.log(user)
   var contents = ''
   if (Object.keys(user).length > 1) {
     contents = (
       <>
-        {/* <nav style={{position: 'fixed', backgroundColor: 'lightblue'}}> */}
-            {/* <Link to='/' style={{textDecoration: 'none',
-                          color: 'black',
-                          margin: '5px',
-                          padding: '5px',
-                          float: 'left',}}>HOME{' '} </Link> */}
-            {/* <Link to={`/mybooks/${user._id}`} style={{textDecoration: 'none',
-                          color: 'black',
-                          margin: '5px',
-                          padding: '5px',
-                          float: 'left',}}>MY BOOKS</Link> */}
-            {/* <p onClick={logout} style={{position: "inline-block",
-                                            color: 'black',
-                                            float: "right",
-                                            margin: '5px',
-                                            padding: '5px'}}>LOGOUT                        
-            </p> */}
-          {/* </nav> */}
         <h5 className='title'>MY BOOKS APP</h5>
         <div className="header">
-          <div id='hello'>HELLO, {user.name}!</div>
+          <div id='hello'>
+            HELLO, {user.name}!
+          </div>
           <div className='searchbox'>
               <form onSubmit={handleGenreSubmit} >
                 <input type="text" 
@@ -199,59 +161,70 @@ function App() {
                 <input type="submit" className='submit' id='searchbutton'/>
               </form>
           </div>
-          <div id='goodbye' onClick={logout}>LOGOUT</div>
-        </div>
-        <div>
-            {/* <Route exact path='/' render={ props => <DrinkAll  apiData={this.state.apiData} 
-                                                              token={this.state.token} 
-                                                              refreshUser={this.checkForLocalToken} 
-                                                              handleDetailsClick={this.handleDetailsClick} {...props} />}/>            
-            <Route value={genre} exact path='/:id' render={ props => <DrinkShow drink={current} {...props} />}/>  
-            <Route exact path='/favorites/:id' render={ props => <MyDranks 
-                                              user={user} 
-                                              apiData={this.state.apiData} 
-                                              token={this.state.token} 
-                                              refreshUser={this.checkForLocalToken} 
-                                              handleDetailsClick={this.handleDetailsClick} {...props} />}/>           */}
+          <div id='goodbye' onClick={logout}>
+            LOGOUT
+          </div>
         </div>
         <h6 className='browse'>BROWSE BOOKS:</h6>
         <div className='flex-container'>
           <div className='left'>
             <div className='leftlist'>
-              <BookListByGenre books={currentGenre} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
-              <BookList books={apiData} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+              <BookListByGenre books={currentGenre} 
+                                addToFavorites={addToFavorites} 
+                                handleBookDetailsClick={handleBookDetailsClick} 
+                                token={token} 
+                                setFavoriteBooks={setFavoriteBooks} 
+                                displaySuggestedBooks={displaySuggestedBooks} 
+                                displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+              <BookList books={apiData} 
+                        addToFavorites={addToFavorites} 
+                        handleBookDetailsClick={handleBookDetailsClick} 
+                        token={token} 
+                        setFavoriteBooks={setFavoriteBooks} 
+                        displaySuggestedBooks={displaySuggestedBooks} 
+                        displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
           </div>
           <div className='right'>
             <div className='rightdetail'>
-            <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+              <BookDetails  bookDetails={currentBook} 
+                            token={token} 
+                            setFavoriteBooks={setFavoriteBooks} 
+                            displaySuggestedBooks={displaySuggestedBooks} 
+                            displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
             <h5 className='browse' style={{width: '43.5vw'}}>MY READS:</h5>
             <div className='rightfave'>
-              <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
+              <FavoriteBooks favoriteBooks={favoriteBooks} 
+                              handleBookDetailsClick={handleBookDetailsClick} 
+                              displaySuggestedBooks={displaySuggestedBooks} 
+                              user={user} 
+                              token={token} 
+                              showFavoriteBooks={showFavoriteBooks} 
+                              displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} />
             </div>
           </div>
-        {/* <div>
-          <Route style={{position: 'fixed'}} exact path='/' render={ props => <BookList books={apiData} 
-                                                          handleBookDetailsClick={handleBookDetailsClick} 
-                                                          token={token} setFavoriteBooks={setFavoriteBooks} 
-                                                          displaySuggestedBooks={displaySuggestedBooks} 
-                                                          displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} {...props}/>} />
-        </div> */}
         </div>
+        <p className='browse' style={{marginBottom: '0px', backgroundColor: 'rgba(59, 117, 115, 0.6)', width: '100vw', borderTop: '1px solid white'}}>
+          SUGGESTED BOOKS BY TITLE:
+        </p>
         <div className='bottom'>
-            {/* <h2>ALL BOOKS</h2>  */}
-            {/* <BookList books={apiData} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
-            {/* <BookListByGenre books={currentGenre} handleBookDetailsClick={handleBookDetailsClick} token={token} setFavoriteBooks={setFavoriteBooks} displaySuggestedBooks={displaySuggestedBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
-            {/* <BookDetails  bookDetails={currentBook} token={token} setFavoriteBooks={setFavoriteBooks} /> */}
-            {/* <FavoriteBooks favoriteBooks={favoriteBooks} handleBookDetailsClick={handleBookDetailsClick} displaySuggestedBooks={displaySuggestedBooks} user={user} token={token} showFavoriteBooks={showFavoriteBooks} displayMoreBooksFromAuthor={displayMoreBooksFromAuthor} /> */}
           <div className='bottomtop'>
-            <SuggestedBooks suggestedBooks={suggestedBooks} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks}/>
+            <SuggestedBooks suggestedBooks={suggestedBooks} 
+                            addToFavorites={addToFavorites} 
+                            handleBookDetailsClick={handleBookDetailsClick} 
+                            setFavoriteBooks={setFavoriteBooks}/>
           </div>
         </div>
+        <p className='browse' style={{marginTop: '0px', backgroundColor: 'rgba(59, 117, 115, 0.6)', width: '100vw', borderTop: '1px solid white'}}>
+          SUGGESTED BOOKS BY AUTHOR:
+        </p>
         <div className='bottom'>
           <div className='bottombottom'>
-            <BooksByAuthor books={author} addToFavorites={addToFavorites} handleBookDetailsClick={handleBookDetailsClick} setFavoriteBooks={setFavoriteBooks} />
+            <BooksByAuthor books={author} 
+                            addToFavorites={addToFavorites} 
+                            handleBookDetailsClick={handleBookDetailsClick} 
+                            setFavoriteBooks={setFavoriteBooks} />
           </div>
         </div>
       </>

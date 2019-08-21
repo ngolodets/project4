@@ -8,20 +8,35 @@ function BookDetails({bookDetails, displaySuggestedBooks, displayMoreBooksFromAu
     <div className='favebook' onClick={() => {displaySuggestedBooks(details.title)
                                             displayMoreBooksFromAuthor(details.authors[0].name)}}>
       <div className='bookdetails'>
-        <a className='link' href={details.url} target='_blank' rel="noopener noreferrer">
-          <img src={url.medium} alt="" style={{width: '140px', height: '160px', float: 'left'}}/>
+        <a className='link' 
+            href={details.url} 
+            target='_blank' 
+            rel="noopener noreferrer">
+          <img src={url.medium} 
+                style={{width: '140px', 
+                        height: '160px', 
+                        float: 'left'}}/>
         </a>
         < br/>
         {details.ebooks && details.ebooks.map((ebook, i) => (
           <div style={{margin: '5px'}}>
-            <a className='link' href={ebook.read_url} target='_blank' key={i} rel="noopener noreferrer" ><p style={{fontWeight: 'bolder'}}>{details.title} </p></a>
+            <a className='link' 
+                href={ebook.read_url} 
+                target='_blank' key={i} 
+                rel="noopener noreferrer" >
+              <p style={{fontWeight: 'bolder', 
+                          wordBreak: 'break-all', 
+                          whiteSpace: 'normal'}}>
+                {details.title} 
+              </p>
+            </a>
             <br />
           </div>
           ))
         }
         {/* <p>{details.subtitle}</p> */}
         {/* <p>{details.by_statement}</p> */}
-        <p>{details.notes}</p>
+        {/* <p style={{wordBreak: 'break-all', whiteSpace: 'normal'}}>{details.notes}</p> */}
         <p>{details.pagination}</p>
         <p>Publication date: {details.publish_date}</p>
         {details.publish_places && details.publish_places.map((place, i) => (
@@ -31,7 +46,13 @@ function BookDetails({bookDetails, displaySuggestedBooks, displayMoreBooksFromAu
         < br/>
         {details.authors && details.authors.map((author, i) => (
           <div>
-            <a className='link' href={author.url} target='_blank' key={i} rel="noopener noreferrer">Author(s): {details.authors[0].name}</a>
+            <a className='link' 
+                href={author.url} 
+                target='_blank' 
+                key={i} 
+                rel="noopener noreferrer">
+              Author(s): {details.authors[0].name}
+            </a>
             <br />
           </div>
           ))
