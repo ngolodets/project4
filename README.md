@@ -1,4 +1,4 @@
-# project4 
+# Project 4 
 ## Book App: Description
 The book app lets the user browse through a variety of books, add the books they have read or are in the process of reading to their list, view details for a particular selection, and comment on the book.  Moreover, the app makes book recommendations based on the title or the author of the book the user is currently viewing.
 ## Screenshot of the App
@@ -10,6 +10,23 @@ The app utilizes JWT authentication and uses two related models: user and book v
 ## General Approach
 The general approach toward creating this application consisted of first finding a reliable external API for the purposes of searching the available books.  I have used Open Library API for this project: [https://openlibrary.org/developers/api](//https://openlibrary.org/developers/api).  
 
-I have then used Express to create restful routes at the backend of the application to support the CRUD functions for the book model.  Once those were built, I used React to render the information on the front-end.  I have then styled the page using CSS (the screenshot of the wireframe is available below).  For this app, I have chosen to render all of the information on a single page.
-![Wirefram Screenshot](client/public/wireframe.png)
+I have then used Express to create restful routes at the backend of the application to support the CRUD functions for the book model.  Once those were built, I used React to render the information on the front-end.  I have then styled the page using CSS (the screenshot of the wireframe is available below).  
+## Installation Instructions
+The application utilizes the following dependencies that can be installed using npm install command:
+-axios
+-bcrypt
+-dotenv
+-express
+-express-jwt
+-express-rate-limit
+-helmet
+-jsonwebtoken
+-mongoose
+## User Stories
+## Wireframe
+For this app, I have chosen to render all of the information on a single page.  The user is able to login to the page and view and manipulate all of the available information without having to switch between different views or menus.
+![Wireframe Screenshot](client/public/wireframe.png)
+## Unsolved Problems
+
+
 
