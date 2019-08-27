@@ -28,7 +28,8 @@ The application is a React app that utilizes the following dependencies that can
 This app is a very basic, simplified, and limited version of popular mainstream library applications.  It is designed for a user who would like to search through various books by genre and decide whether they would like to read the books they find.  The application is also able to make suggestions to the user based on the title of the books they are currently viewing or based on the author.
 ## Wireframe
 For this app, I have chosen to render all of the information on a single page.  The user is able to login to the page and view and manipulate all of the available information without having to switch between different views or menus.
-![Wireframe Screenshot](client/public/wireframe.png)
+<img src="client/public/wireframe.png" width="400" height="400" />
+
 ## Unsolved Problems
 One of the limitations of this app is the lack of descriptive information about the book the viewer is viewing.  Another problem is that the app is only able to make recommendations based either on the current book title or that book's author.  However, currently, the app cannot make recommendations based on the books that are in the user's list -- this is on the wishlist of things to implement.   
 
