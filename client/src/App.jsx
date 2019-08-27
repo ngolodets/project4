@@ -18,8 +18,8 @@ function App() {
   const [currentGenre, setCurrentGenre] = useState({});
   const [currentBook, setCurrentBook] = useState({});
   const [favoriteBooks, setFavoriteBooks] = useState({});
-  const [suggestedBooks, setSuggestedBooks] = useState({});
-  const [author, setAuthor] = useState({});
+  const [suggestedBooks, setSuggestedBooks] = useState([]);
+  const [author, setAuthor] = useState([]);
 
   useEffect(() => {
     var token = localStorage.getItem('mernToken');
@@ -82,7 +82,7 @@ function App() {
   function displayMoreBooksFromAuthor(author) {
     axios.get(`http://openlibrary.org/search.json?author=${author}`)
         .then(result => {
-        setAuthor(result.data.docs)
+          setAuthor(result.data.docs)
     })
   }
 
