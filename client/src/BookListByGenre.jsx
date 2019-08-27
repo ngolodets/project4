@@ -23,14 +23,14 @@ function BookListByGenre({books, handleBookDetailsClick, displaySuggestedBooks, 
         <div key={index} className='bookinfo' onClick={() => {displaySuggestedBooks(book.title)
                                         displayMoreBooksFromAuthor(book.authors[0].name)}}>
           <h5 className='booktitle' onClick={() => handleBookDetailsClick(book.cover_edition_key)}>{book.title}</h5>
-          {/* {book.authors && book.authors.map((author, i) => (
+          {/* className='submit' {book.authors && book.authors.map((author, i) => (
             <p key={i} className='bookauthors' >{author.name}</p>
           ))} */}
           <p className='bookauthors'>{book.authors[0].name}</p>
           <div className='buttons'>
-            <button className='submit' className='favebutton' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
+            <button className='favebutton' onClick={() => addToFavorites(book.title, book.cover_edition_key)}>ADD TO MY LIST</button>
             < br/>
-            <button className='submit' className='seemorebutton' onClick={() => displayMoreBooksFromAuthor(book.authors[0].name)}>SEE MORE FROM THIS AUTHOR</button>
+            <button className='seemorebutton' onClick={() => displayMoreBooksFromAuthor(book.authors[0].name)}>SEE MORE FROM THIS AUTHOR</button>
           </div>
       </div>
       )
