@@ -8,14 +8,12 @@ function BookList({books, handleBookDetailsClick, setFavoriteBooks, displaySugge
   if (books.length) {
     content = books.map((book, index) => {
       return (
-        <div key={index} className='bookinfo' onClick={() => displaySuggestedBooks(book.title)
-                                                            }>
+        <div key={index} className='bookinfo' onClick={() => {displaySuggestedBooks(book.title)
+                                                            displayMoreBooksFromAuthor(book.authors[0].name)}}>
           <h5 className='booktitle' onClick={() => handleBookDetailsClick(book.cover_edition_key)}>{book.title}</h5>
           {/* {book.authors && book.authors.map((author, i) => (
               <p className='bookauthors' key={i}>{author.name}</p>
           ))} 
-          onClick={() => {displaySuggestedBooks(book.title)
-                                                            displayMoreBooksFromAuthor(book.authors[0].name)}}
           */}
           <p className='bookauthors'>{book.authors[0].name}</p>
           <div className='buttons'>

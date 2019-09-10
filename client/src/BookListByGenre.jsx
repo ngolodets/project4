@@ -20,9 +20,14 @@ function BookListByGenre({books, handleBookDetailsClick, displaySuggestedBooks, 
   if (books.length) {
     content = books.map((book, index) => {
       return (
-        <div key={index} className='bookinfo' onClick={() => {displaySuggestedBooks(book.title)
-                                        displayMoreBooksFromAuthor(book.authors[0].name)}}>
-          <h5 className='booktitle' onClick={() => handleBookDetailsClick(book.cover_edition_key)}>{book.title}</h5>
+        <div key={index} 
+          className='bookinfo' 
+          onClick={() => {displaySuggestedBooks(book.title)
+                          displayMoreBooksFromAuthor(book.authors[0].name)}}>
+          <h5 className='booktitle' 
+            onClick={() => handleBookDetailsClick(book.cover_edition_key)}>
+              {book.title}
+          </h5>
           {/* className='submit' {book.authors && book.authors.map((author, i) => (
             <p key={i} className='bookauthors' >{author.name}</p>
           ))} */}

@@ -38,5 +38,4 @@ function SuggestedBooks({suggestedBooks, handleBookDetailsClick, token, setFavor
     )
   }
 
-
 export default SuggestedBooks;

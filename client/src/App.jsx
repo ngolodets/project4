@@ -72,7 +72,7 @@ function App() {
   function displaySuggestedBooks(bookTitle) {
     //bookTitle = bookTitle.toLowerCase().split(' ').join('+');
     //console.log('booktitle: ', bookTitle)
-    axios.get(`http://openlibrary.org/search.json?title=${bookTitle}`)
+    axios.get(`https://openlibrary.org/search.json?title=${bookTitle}`)
       .then(result => {
         setSuggestedBooks(result.data.docs)
     })
@@ -80,7 +80,7 @@ function App() {
 
   // displays the list of book suggestions based on the current author
   function displayMoreBooksFromAuthor(author) {
-    axios.get(`http://openlibrary.org/search.json?author=${author}`)
+    axios.get(`https://openlibrary.org/search.json?author=${author}`)
         .then(result => {
           setAuthor(result.data.docs)
     })
